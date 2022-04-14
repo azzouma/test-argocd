@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-argocd-deploy
+  namespace: argo-rollouts
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: test-argocd-deploy
+  template:
+    metadata:
+      labels:
+        app: test-argocd-deploy
+    spec:
+      containers:
+        - name: rollouts-demo
+          image: argoproj/rollouts-demo:blue
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
